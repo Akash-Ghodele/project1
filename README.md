@@ -2,27 +2,27 @@
 
 ### Project structure
 ```
-aggregproject1    (project root)
-├── Dockerfile
-├── README.md
-├── app
+aggregproject1    ( project root )
+├── Dockerfile    ( docker image configuration )
+├── README.md     ( project documentation )
+├── app           ( django project root - created using django-admin command )
 │   ├── app
 │   │   ├── __init__.py
 │   │   ├── asgi.py
-│   │   ├── settings.py
-│   │   ├── urls.py
+│   │   ├── settings.py   ( django project settings )
+│   │   ├── urls.py       ( django default root url conf )
 │   │   └── wsgi.py
-│   ├── core
+│   ├── core              ( django application 1 )
 │   │   ├── __init__.py
-│   │   ├── admin.py
-│   │   ├── apps.py
-│   │   ├── management
+│   │   ├── admin.py      ( auto-created when you start app )
+│   │   ├── apps.py       ( auto-created when you start app )
+│   │   ├── management    ( creating custom commands using django-admin interface ) 
 │   │   │   ├── __init__.py
 │   │   │   └── commands
-│   │   ├── migrations
+│   │   ├── migrations    ( auto-created whenever DB migrations are performed )
 │   │   │   └── __init__.py
-│   │   ├── models.py
-│   │   └── tests
+│   │   ├── models.py     ( DB table DDLs - ORM way )
+│   │   └── tests         ( directory for writing unit-tests )
 │   │       ├── __init__.py
 │   │       └── test_commands.py
 │   └── manage.py
