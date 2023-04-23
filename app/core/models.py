@@ -90,4 +90,5 @@ class User(AbstractBaseUser, PermissionsMixin):
     # We are overriding default manager with our custom manager here.
     objects = UserManager()
 
-    USERNAME_FIELD = "email"  # overrides the default user field from base class
+    USERNAME_FIELD = "email"
+    # overrides the default user field from base class

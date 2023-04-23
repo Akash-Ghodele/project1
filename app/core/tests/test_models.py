@@ -1,8 +1,6 @@
 """
 Test the models and functionality related to the models.
 """
-
-
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 
@@ -16,13 +14,11 @@ class TestModel(TestCase):
         password = "testpass123"
 
         user = get_user_model().objects.create_user(email=email, password=password)
-
         self.assertEqual(user.email, email)
         self.assertTrue(user.check_password(password))
 
     def test_new_user_email_normalized(self):
         """Test email is in normalized format for any new user"""
-
         password = "password@321"
         sample_emails = [
             ["test1@EXAMPLE.com", "test1@example.com"],
