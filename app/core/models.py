@@ -13,7 +13,7 @@ from django.db import models  # noqa
 from django.contrib.auth.models import (
     AbstractBaseUser,
     PermissionsMixin,
-    BaseUserManager
+    BaseUserManager,
 )
 
 
@@ -42,7 +42,8 @@ class UserManager(BaseUserManager):
         # user without email normalization
         # user = self.model(email=email)
 
-        # best practice to hash password using super class method `set_password`
+        # best practice to hash password using super class method
+        # `set_password`
         user.set_password(password)
 
         # best practicec to use `using=self._db` when using multiple database
@@ -76,7 +77,6 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-
     email = models.EmailField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
 
@@ -91,6 +91,3 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = "email"  # overrides the default user field from base class
-
-
-
