@@ -41,6 +41,7 @@ class AuthTokenSerializer(serializers.Serializer):
         """validate and authenticate the user"""
 
         email = data.get("email")
+
         if email.isupper():
             raise serializers.ValidationError("Email is not as per standards")
 

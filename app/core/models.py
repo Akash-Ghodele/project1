@@ -15,6 +15,8 @@ from django.contrib.auth.models import (
     PermissionsMixin,
     BaseUserManager,
 )
+from django.conf import settings
+from django.utils import timezone
 
 
 # Create your models here
@@ -90,5 +92,85 @@ class User(AbstractBaseUser, PermissionsMixin):
     # We are overriding default manager with our custom manager here.
     objects = UserManager()
 
+<<<<<<< HEAD
     USERNAME_FIELD = "email"
     # overrides the default user field from base class
+=======
+    USERNAME_FIELD = "email"  # overrides the default user field from base class
+
+
+class Portal(models.Model):
+
+    # TODO - refer
+    # https://docs.djangoproject.com/en/4.1/ref/models/fields/#field-types
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
+    name = models.CharField(max_length=250, unique=True)
+    description = models.CharField(max_length=250)
+
+    def __str__(self):
+        return str(self.id) + " portal - " + self.name
+
+
+class JobTitle(models.Model):
+    """
+    JobTitle will have association with multiple portals
+    `JobTitle` <--> `Portal`  (one-to-many relationship)
+    `JobDescription`  <--> `JobTitle` (one-to-one relationship)
+
+    # TODO
+    # refer
+    # https://docs.djangoproject.com/en/4.1/topics/db/examples/#examples-of-model-relationship-api-usage
+    """
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
+    title = models.CharField(max_length=250)
+    last_updated = models.DateTimeField(default=timezone.now)
+
+    # one-to-one relationship
+    job_description = models.OneToOneField(
+        "JobDescription", on_delete=models.CASCADE
+    )
+
+    # one-to-many relationship
+    portal = models.ForeignKey(Portal, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title + f"( {self.portal} )"
+
+
+class JobDescription(models.Model):
+    """
+
+    """
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
+    role = models.CharField(max_length=250, default="")
+    description_text = models.CharField(max_length=250)
+    pub_date = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.role + f"( {self.pub_date} )"
+
+
+class Applicant(User):
+
+    is_applicant = models.BooleanField(default=True)
+    # one-to-many relationship
+    applied_for = models.ForeignKey(JobTitle, on_delete=models.CASCADE)
+    cover_letter = models.CharField(max_length=250)
+
+    def __str__(self):
+        return self.name
+
+
+>>>>>>> 063f9ab84e543b0e7d701e78d35ce8b7815c478e
