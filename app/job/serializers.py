@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from app.core.models import JobTitle, Portal, JobDescription
+from core.models import JobTitle, Portal, JobDescription
 
 
 class JobTitleSerializer(serializers.ModelSerializer):
@@ -14,8 +14,13 @@ class JobTitleSerializer(serializers.ModelSerializer):
 
 
 class JobDescriptionSerializer(JobTitleSerializer):
-    """
-    TODO
+    """Serializer class for JobTitle detail view
+
+    WE will reuse functionality written under `JobTitleSerializer`
+    By these means, we are avoiding duplicates in code.
+
+    Writing nested serializers
+    - TODO - refer ->
     - https://www.django-rest-framework.org/api-guide/serializers/#overriding-serialization-and-deserialization-behavior
 
     """
