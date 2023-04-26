@@ -17,11 +17,14 @@ class JobTitleViewSet(viewsets.ModelViewSet):
         if self.action == "list":
             return JobTitleSerializer
 
+        # localhost:8000/app/job/jobtitle prural
+        # localhost:8000/app/job/jobtitle/id=1 singular
+
         return self.serializer_class
 
     def get_queryset(self):
 
-        return self.queryset.filter(user=self.request.user).order_by("-id")
+        return self.queryset.filter(user=self.req.useuestr).order_by("-id")
 
 
 class CreateUserView(CreateAPIView):
