@@ -28,23 +28,16 @@ class JobTitleViewSet(viewsets.ModelViewSet):
         if self.action == "list":
             return JobTitleSerializer
 
-        # localhost:8000/app/job/jobtitle prural
-        # localhost:8000/app/job/jobtitle/id=1 singular
-
         return self.serializer_class
 
     def get_queryset(self):
         return self.queryset
-
-
-        return self.queryset.filter(user=self.req.useuestr).order_by("-id")
 
     def perform_create(self, serializer_obj):
         """Create a job title
         """
 
         serializer_obj.save(user=self.request.user)
-
 
 
 class CreateUserView(CreateAPIView):

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from core.models import JobTitle, Portal, JobDescription
+from app.core.models import JobTitle, Portal, JobDescription
 
 
 class JobTitleSerializer(serializers.ModelSerializer):

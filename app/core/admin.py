@@ -1,5 +1,6 @@
 from django.contrib import admin  # noqa
 from django.contrib.auth import get_user_model
+from app.core import models
 
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
@@ -63,3 +64,7 @@ class UserAdmin(BaseUserAdmin):
 
 
 admin.site.register(get_user_model(), UserAdmin)
+admin.site.register(models.JobTitle)
+admin.site.register(models.JobDescription)
+admin.site.register(models.Portal)
+admin.site.register(models.Applicant)
