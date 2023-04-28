@@ -5,8 +5,8 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.generics import CreateAPIView
 from .serializers import JobTitleSerializer, JobDescriptionSerializer
-from core.models import JobTitle
-from job import serializers
+from app.core.models import JobTitle
+from app.job import serializers
 from rest_framework import serializers
 
 
@@ -24,6 +24,7 @@ class JobTitleViewSet(viewsets.ModelViewSet):
     queryset = JobTitle.objects.all()
 
     def get_serializer_class(self):
+        """Returns the serializer class to be used for the request"""
 
         if self.action == "list":
             return JobTitleSerializer
@@ -31,10 +32,19 @@ class JobTitleViewSet(viewsets.ModelViewSet):
         return self.serializer_class
 
     def get_queryset(self):
+        """
+        We want to filter out jobtitles for authenticated users
+        """
+
         return self.queryset
 
     def perform_create(self, serializer_obj):
-        """Create a job title
+        """Create a new job title
+        # TODO - refer
+        https://www.django-rest-framework.org/api-guide/generic-views/#methods
+        Args:
+            serializer: validated serializer
+        Returns:
         """
 
         serializer_obj.save(user=self.request.user)
